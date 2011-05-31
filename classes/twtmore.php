@@ -14,8 +14,14 @@ namespace Twtmore;
 
 class Twtmore {
 	
+	/**
+	 * API Endpoint
+	 */
 	const ENDPOINT	= 'http://api.twtmore.com';
 	
+	/**
+	 * API Version
+	 */
 	const VERSION	= 2;
 	
 	/**
@@ -26,8 +32,14 @@ class Twtmore {
 	 */
 	protected static $_apikey	= false;
 	
+	/**
+	 * Accepted API Response Formats, currently on JSON
+	 */
 	protected static $_formats	= array( 'json' );
 	
+	/**
+	 * Selected API Response Format
+	 */
 	protected static $_format	= 'json';
 	
 	/**
@@ -61,6 +73,13 @@ class Twtmore {
 		}
 	}
 	
+	/**
+	 * Retrieve information about a tweet
+	 *
+	 * @param string $id eg: "A" or "XgD"
+	 * @return string $response
+	 * @see http://dev.twtmore.com/docs/api/tweet
+	 */
 	public static function tweet($id)
 	{
 		$body = array(
@@ -70,6 +89,16 @@ class Twtmore {
 		return self::_request('tweet', $body);
 	}
 	
+	/**
+	 * Shorten a tweet with twtmore
+	 *
+	 * @param string $user 
+	 * @param string $tweet 
+	 * @param string $reply_to_user 
+	 * @param string $reply_to_tweet 
+	 * @return string $response
+	 * @see http://dev.twtmore.com/docs/api/shorten
+	 */
 	public static function shorten($user, $tweet, $reply_to_user = false, $reply_to_tweet = false)
 	{
 		$body = array(
@@ -86,6 +115,31 @@ class Twtmore {
 		return self::_request('shorten', $body);
 	}
 	
+	/**
+	 * Update the Twitter Status ID of a twtmore tweet with the "callback_key" returned from the "shorten" API Method
+	 *
+	 * @param string $key 
+	 * @param string $status_id 
+	 * @return string $response
+	 * @author Tom Arnfeld
+	 */
+	public static function callback($key, $status_id)
+	{
+		$body = array(
+			'key' => $key,
+			'status_id' => $status_id
+		);
+		
+		return self::_request('callback', $body);
+	}
+	
+	/**
+	 * Perform a request to the API with a method and body
+	 *
+	 * @param string $method 
+	 * @param string $body 
+	 * @return string $response
+	 */
 	protected static function _request($method, $body = array())
 	{
 		$ch = curl_init();
@@ -134,6 +188,13 @@ class Twtmore {
 		return self::_decode($response, self::$_format);
 	}
 	
+	/**
+	 * Decode the response with the passed format
+	 *
+	 * @param string $data 
+	 * @param string $format 
+	 * @return $decoded (array/object)
+	 */
 	protected static function _decode($data, $format = false)
 	{
 		if (!$format)
