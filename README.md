@@ -39,5 +39,5 @@ Twtmore::shorten('twtmore', 'Long tweet...', 'twtmoretest', '123123123123');
 Documentation: http://dev.twtmore.com/docs/api/callback
 
 ```php
-Twtmore::callback('.. callback key ..', '12313123123);
+Twtmore::callback('.. callback key ..', '12313123123');
 ```
