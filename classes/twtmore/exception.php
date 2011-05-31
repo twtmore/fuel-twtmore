@@ -14,6 +14,8 @@ namespace Twtmore;
 
 class Twtmore_Exception extends \Exception { }
 
+class Twtmore_Exception_CurlError extends \Exception { }
+
 class Twtmore_Exception_Unauthorized extends Twtmore_Exception { }
 
 class Twtmore_Exception_BadRequest extends Twtmore_Exception { }
