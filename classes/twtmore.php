@@ -70,6 +70,22 @@ class Twtmore {
 		return self::_request('tweet', $body);
 	}
 	
+	public static function shorten($user, $tweet, $reply_to_user = false, $reply_to_tweet = false)
+	{
+		$body = array(
+			'user' => $user,
+			'tweet' => $tweet
+		);
+		
+		if ($reply_to_user && $reply_to_tweet)
+		{
+			$body['reply_to_user'] = $reply_to_user;
+			$body['reply_to_tweet'] = $reply_to_tweet;
+		}
+		
+		return self::_request('shorten', $body);
+	}
+	
 	protected static function _request($method, $body = array())
 	{
 		$ch = curl_init();

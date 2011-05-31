@@ -14,6 +14,7 @@ return array (
 
 	/**
 	 * Enter your twtmore application API key here
+	 * (Best to extend this in your local application config folder, though)
 	 *
 	 * @see http://dev.twtmore.com/docs/introduction
 	 */
