@@ -14,9 +14,9 @@ namespace Twtmore;
 
 class Twtmore {
 	
-	const ENDPOINT	= 'http://api.twtmore.new.local'; //api.twtmore.com
+	const ENDPOINT	= 'http://api.twtmore.com';
 	
-	const VERSION	= 1;
+	const VERSION	= 2;
 	
 	/**
 	 * Local cache of apikey config option
@@ -38,7 +38,7 @@ class Twtmore {
 	 */
 	public static function _init()
 	{
-		\Config::load('twtmore');
+		\Config::load('twtmore', 'twtmore', true);
 		
 		if (!self::$_apikey = \Config::get('twtmore.apikey'))
 		{
@@ -90,7 +90,9 @@ class Twtmore {
 	{
 		$ch = curl_init();
 		
-		curl_setopt($ch, CURLOPT_URL, self::ENDPOINT . '/v' . self::VERSION . '/' . $method);
+		$url = self::ENDPOINT . '/v' . self::VERSION . '/' . $method;
+		
+		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		
 		// Merge in the API Key
@@ -112,16 +114,16 @@ class Twtmore {
 			switch ($response_status)
 			{
 				case 401:
-					throw new Twtmore_Exception_Unauthorized('');
+					throw new Twtmore_Exception_Unauthorized('Invalid API Key');
 					break;
 				case 400:
-					throw new Twtmore_Exception_BadRequest('');
+					throw new Twtmore_Exception_BadRequest('Bad Request');
 					break;
 				case 404:
-					throw new Twtmore_Exception_Unauthorized('');
+					throw new Twtmore_Exception_NotFound('Method / Version not found');
 					break;
 				case 500:
-					throw new Twtmore_Exception_InternalError('');
+					throw new Twtmore_Exception_InternalError('Internal Error');
 					break;
 				default:
 					throw new Twtmore_Exception('API Returned != OK response: ' . $response_status);
