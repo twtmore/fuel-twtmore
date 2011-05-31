@@ -77,10 +77,10 @@ class Twtmore {
 		curl_setopt($ch, CURLOPT_URL, self::ENDPOINT . '/v' . self::VERSION . '/' . $method);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		
-		if (count($body) > 0)
-		{
-			curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($body));
-		}
+		// Merge in the API Key
+		$body = array_merge($body, array( 'apikey' => self::$_apikey ));
+		
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($body));
 		
 		$response = curl_exec($ch);
 		
