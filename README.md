@@ -19,12 +19,14 @@ The twtmore package is fully static, so you wont need to instantiate it anywhere
 
 ### Tweet Method
 Documentation: http://dev.twtmore.com/docs/api/tweet
+
 ```php
 Twtmore::tweet('A'); // http://twtmore.com/tweet/A
 ```
 
 ### Shorten Method
 Documentation: http://dev.twtmore.com/docs/api/shorten
+
 ```php
 // Simple
 Twtmore::shorten('twtmore', 'Long tweet...');
@@ -35,6 +37,7 @@ Twtmore::shorten('twtmore', 'Long tweet...', 'twtmoretest', '123123123123');
 
 ### Callback Method
 Documentation: http://dev.twtmore.com/docs/api/callback
+
 ```php
 Twtmore::callback('.. callback key ..', '12313123123);
 ```
