@@ -18,6 +18,6 @@ return array (
 	 *
 	 * @see http://dev.twtmore.com/docs/introduction
 	 */
-	'apikey' => 'testapitesttest',
+	'apikey' => '',
 
 );
