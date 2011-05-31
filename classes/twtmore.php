@@ -76,7 +76,11 @@ class Twtmore {
 		
 		curl_setopt($ch, CURLOPT_URL, self::ENDPOINT . '/v' . self::VERSION . '/' . $method);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $encoded_data);
+		
+		if (count($body) > 0)
+		{
+			curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($body));
+		}
 		
 		$response = curl_exec($ch);
 		
