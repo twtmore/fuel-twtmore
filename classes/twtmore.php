@@ -18,8 +18,6 @@ class Twtmore {
 	
 	const VERSION	= 1;
 	
-	const FORMATS	= array('json');
-	
 	/**
 	 * Local cache of apikey config option
 	 *
@@ -27,6 +25,8 @@ class Twtmore {
 	 * @access protected
 	 */
 	protected static $_apikey	= false;
+	
+	protected static $_formats	= array( 'json' );
 	
 	protected static $_format	= 'json';
 	
@@ -47,7 +47,7 @@ class Twtmore {
 		
 		if ($format = \Config::get('twtmore.format'))
 		{
-			if (!in_array($format, self::FORMATS))
+			if (!in_array($format, self::$_formats))
 			{
 				throw new Twtmore_Exception('Invalid API Format.');
 			}
