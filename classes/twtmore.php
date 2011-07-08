@@ -22,7 +22,7 @@ class Twtmore {
 	/**
 	 * API Version
 	 */
-	const VERSION	= 2;
+	const VERSION	= 3;
 	
 	/**
 	 * Local cache of apikey config option
